@@ -8,7 +8,7 @@ markdown语法总结
 - 图片
 - 表格
 - 代码
-
+- 缩进
 ----------
 
 - 图片  
@@ -57,7 +57,7 @@ markdown语法总结
 - 代码  
 在github中有3种方式表示代码  
  - 4个空格或者1个tab表示代码块  
- 如下
+ 如
             
             int main() {
                 print("hello world");           
@@ -73,16 +73,30 @@ markdown语法总结
     在github显示为 `print("hello world")`
  
  - \`\`\`\`表示加强型的代码块  
-    如：
+    如
  
             ````ruby
             print "hello world"
             ````
  
- 在github的显示是  
+    在github的显示是  
 
         ````ruby
         print "hello world"
         ````
+
+- 缩进
+在markdown中，如果有层次关系，对于 **列表** 和 **引用**，二级关系在第一级的基础上加一个空格即可。而对于 列表 和 引用 的多级关系和文本的关系，4个空格表示层级之间的关系。  
+如  
+- list1
+ - list2
+     - list3
+     
+> quote1
+ > quote2
+     > quote3
+
+teest
+    test
 
 
