@@ -14,7 +14,7 @@ markdown语法总结
 - 图片
 插入图片的语法为
 
-       ![title](url "description")
+        ![title](url "description")
 
 可以先在git仓库中新建文件夹，然后将图片放到该文件夹中。
 如  
