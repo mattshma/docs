@@ -1,7 +1,7 @@
 markdown语法总结
 ---
 
-注：本总结针对github中markdown的讲法
+注：本总结针对github中markdown的语法
 
 目录
 ----
