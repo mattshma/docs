@@ -17,7 +17,7 @@ markdown语法总结
         ![title](url "description")
 
 如
-![test](https://github.com/hqjma/docs/blob/master/img/identicon.png "desc")
+![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
 - 表格
 插入表格的语法为
@@ -27,6 +27,7 @@ markdown语法总结
 >   t1  |  t2   |   t3
 >   t4  |  t5   |   t6
 
+/注意表格上下均有空行/
 如
 
    歌曲名  |  歌手
