@@ -69,8 +69,8 @@ markdown语法总结
             ````
 在github的显示是
 
-    ````ruby
-    print "hello world"
-    ````
+        ````ruby
+        print "hello world"
+        ````
 
 
