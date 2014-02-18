@@ -43,7 +43,7 @@ markdown语法总结
    最爱    | 张国荣
    有心人  | 张国荣
 
-- 代码
+- 代码  
 在github中有3种方式表示代码
  - 4个空格或者1个tab表示代码块
  如下
@@ -67,7 +67,7 @@ markdown语法总结
             ````ruby
             print "hello world"
             ````
-    在github的显示是
+ 在github的显示是
 
         ````ruby
         print "hello world"
