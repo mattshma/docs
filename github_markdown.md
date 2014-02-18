@@ -17,7 +17,7 @@ markdown语法总结
         ![title](url "description")
 
 如
-![test]( "desc")
+![test](https://github.com/hqjma/docs/blob/master/img/identicon.png "desc")
 
 - 表格
 插入表格的语法为
@@ -28,6 +28,7 @@ markdown语法总结
 >   t4  |  t5   |   t6
 
 如
+
    歌曲名  |  歌手
  ----------|--------
   人来人往 | 陈奕迅
