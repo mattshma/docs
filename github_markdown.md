@@ -14,7 +14,7 @@ markdown语法总结
 - 图片
 插入图片的语法为
 
-    ![title](url "description")
+       ![title](url "description")
 
 可以先在git仓库中新建文件夹，然后将图片放到该文件夹中。
 如  
@@ -54,7 +54,7 @@ markdown语法总结
             
  注意在一级列表中，代码块前面需要8个空格，在二级列表中，代码块前面需要12个空格，依此类推。
 
-- \` \`表示代码片断
+ - \` \`表示代码片断
  如
 
            `print("hello world")`
@@ -68,8 +68,9 @@ markdown语法总结
             print "hello world"
             ````
 在github的显示是
-````ruby
- print "hello world"
-````
+
+    ````ruby
+    print "hello world"
+    ````
 
 
