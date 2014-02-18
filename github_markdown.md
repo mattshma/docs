@@ -91,6 +91,12 @@ markdown语法总结
         - list
          - list
            - list
+          
+在github中表示如下：
+
+> - list
+>  - list
+>    - list
 
 而如果列表下有文本，希望文本和列表对齐，则文本每次以 **4** 个空格的方式缩进。
 
