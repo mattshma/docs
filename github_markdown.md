@@ -16,7 +16,11 @@ markdown语法总结
 
         ![title](url "description")
 
-如
+可以先在git仓库中新建文件夹，然后将图片放到该文件夹中。
+如  
+> ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
+
+显示结果是
 ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
 - 表格
@@ -38,6 +42,10 @@ markdown语法总结
    有心人  | 张国荣
 
 - 代码
+ 
+    舟桥
+
+
 在github中有3种方式表示代码
  - 4个空格或者1个tab表示代码块
  如下
