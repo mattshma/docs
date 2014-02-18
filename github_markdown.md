@@ -22,6 +22,7 @@ markdown语法总结
     ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
 显示结果是
+
 ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
 - 表格
@@ -44,28 +45,28 @@ markdown语法总结
 
 - 代码
  
-        舟桥
-
-
 在github中有3种方式表示代码
  - 4个空格或者1个tab表示代码块
  如下
+            
             int main() {
                 print("hello world");           
             }
             
- 注意在一级列表中，代码块需要8个空格，在二级列表中，代码块需要12个空格，依此类推
+ 注意在一级列表中，代码块需要8个空格，在二级列表中，代码块需要12个空格，依此类推。
 
 - \` \`表示代码片断
  如
-> `print("hello world")`
+
+           `print("hello world")`
+
  在github显示为 `print("hello world")`
  
  - ````表示加强型的代码块
  
->````ruby
- print "hello world"
->````
+            ````ruby
+            print "hello world"
+            ````
 在github的显示是
 ````ruby
  print "hello world"
