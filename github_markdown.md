@@ -18,7 +18,8 @@ markdown语法总结
 
 可以先在git仓库中新建文件夹，然后将图片放到该文件夹中。
 如  
-> ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
+    
+    ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
 显示结果是
 ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
@@ -43,7 +44,7 @@ markdown语法总结
 
 - 代码
  
-    舟桥
+        舟桥
 
 
 在github中有3种方式表示代码
