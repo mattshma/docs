@@ -26,7 +26,7 @@ markdown语法总结
 
     ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
-- 表格
+- 表格  
 插入表格的语法为
 
         head1 | head2 | head3
@@ -55,7 +55,7 @@ markdown语法总结
    最爱    | 张国荣
    有心人  | 张国荣
 
-- 代码  
+- 代码   
 在github中有3种方式表示代码  
  - 4个空格或者1个tab表示代码块  
  如
@@ -86,7 +86,7 @@ markdown语法总结
         print "hello world"
         ````
 
-- 缩进  
+- 缩进   
 在markdown中，如果有层次关系，对于 **列表**， n级层次在n-1级的基础上前面至少多 **n-1** 个空格，则有层次关系。
 
         - list
