@@ -16,8 +16,8 @@ markdown语法总结
 
         ![title](url "description")
 
-可以先在git仓库中新建文件夹，然后将图片放到该文件夹中。
-如  
+    可以先在git仓库中新建文件夹，然后将图片放到该文件夹中。
+    如  
     
     ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
