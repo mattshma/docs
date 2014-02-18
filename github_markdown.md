@@ -11,7 +11,7 @@ markdown语法总结
 
 ----------
 
-- 图片
+- 图片  
 插入图片的语法为
 
         ![title](url "description")
@@ -21,9 +21,9 @@ markdown语法总结
     
     ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
-显示结果是
+    显示结果是
 
-![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
+    ![test](https://raw2.github.com/hqjma/docs/master/img/identicon.png "desc")
 
 - 表格
 插入表格的语法为
@@ -55,11 +55,11 @@ markdown语法总结
  注意在一级列表中，代码块前面需要8个空格，在二级列表中，代码块前面需要12个空格，依此类推。
 
  - \` \`表示代码片断
- 如
+    如
 
            `print("hello world")`
 
- 在github显示为 `print("hello world")`
+    在github显示为 `print("hello world")`
  
  - \`\`\`\`表示加强型的代码块
  如：
