@@ -73,17 +73,17 @@ markdown语法总结
 
     在github显示为 `print("hello world")`
  
- - \`\`\`\`表示加强型的代码块  
+ - \`\`\`表示加强型的代码块  
     如
  
-            ````ruby
+            ```ruby
             print "hello world"
-            ````
+            ```
  
     在github的显示是  
 
-        ````ruby
-        print "hello world"
+        ```ruby
+        pint "hello world"
         ````
 
 - 缩进   
