@@ -9,6 +9,7 @@ markdown语法总结
 - 表格
 - 代码
 - 缩进
+- 空格
 
 ----------
 
@@ -100,6 +101,37 @@ markdown语法总结
     >    - list
 
     而如果列表下有文本，希望文本和列表对齐，则文本每次以 **4** 个空格的方式缩进。
+
+- 空格
+这部分其实是HTML的内容，但有时候可能需要展示文件的组织结构。
+- `&nbsp;`，不断行的空白，一个字符宽度
+- `&ensp;`，半个空白，一个字符宽度
+- `&emsp;`，一个空白，两个字符宽度
+- `&thinsp;`，窄空白，小于一个字符宽度
+
+如下：
+        >.  
+         |---- Capfile  
+         |---- config  
+         |&emsp;&emsp;&emsp;|---- deploy  
+         |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;|---- production.rb  
+         |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp; \`---- staging.rb  
+         |&emsp;&emsp;&emsp;\`---- deploy.rb  
+         \`---- lib  
+         &emsp;&emsp;&emsp;\`---- capistrano  
+         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\`---- tasks 
+
+其在github上的显示为
+>.  
+ |---- Capfile  
+ |---- config  
+ |&emsp;&emsp;&emsp;|---- deploy  
+ |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;|---- production.rb  
+ |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp; \`---- staging.rb  
+ |&emsp;&emsp;&emsp;\`---- deploy.rb  
+ \`---- lib  
+ &emsp;&emsp;&emsp;\`---- capistrano  
+ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\`---- tasks 
 
 
 -----
