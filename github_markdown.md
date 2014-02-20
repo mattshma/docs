@@ -70,16 +70,16 @@ markdown语法总结
  - \` \`表示代码片断  
     如
 
-           `print("hello world")`
+        `print("hello world")`
 
     在github显示为 `print("hello world")`
  
  - \`\`\`表示加强型的代码块  
     如
  
-            ```ruby
-            print "hello world"
-            ```
+        ```ruby
+        print "hello world"
+        ```
  
     在github的显示是  
 
