@@ -103,4 +103,6 @@ markdown语法总结
 
 
 
-可参考： [GitHub 风格的 Markdown 语法][https://github.com/cssmagic/blog/issues/13]
+Reference:  
+- [GitHub 风格的 Markdown 语法](https://github.com/cssmagic/blog/issues/13)
+- [Markdown语法说明](http://uliweb.clkg.org/tutorial/view_chapter/32)
