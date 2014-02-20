@@ -121,8 +121,7 @@ markdown语法总结
          &emsp;&emsp;&emsp;\`---- capistrano  
          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\`---- tasks 
 
-/注：空白处为`&emsp;`/
-
+*注：空白处为`&emsp;`*
 
 -----
 Reference:  
