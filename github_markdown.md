@@ -83,9 +83,9 @@ markdown语法总结
  
     在github的显示是  
 
-        ```ruby
-        pint "hello world"
-        ````
+    ```ruby
+    pint "hello world"
+    ```
 
 - 缩进   
 在markdown中，如果有层次关系，对于 **列表**， n级层次在n-1级的基础上前面至少多 **n-1** 个空格，则有层次关系。
