@@ -110,16 +110,16 @@ markdown语法总结
 - `&thinsp;`，窄空白，小于一个字符宽度  
 
 如下：  
-        > .  
-          |---- Capfile  
-          |---- config  
-          |&emsp;&emsp;&emsp;|---- deploy  
-          |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;|---- production.rb  
-          |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp; \`---- staging.rb  
-          |&emsp;&emsp;&emsp;\`---- deploy.rb  
-          \`---- lib  
-          &emsp;&emsp;&emsp;\`---- capistrano  
-          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\`---- tasks 
+> .  
+  |---- Capfile  
+  |---- config  
+  |&emsp;&emsp;&emsp;|---- deploy  
+  |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;|---- production.rb  
+  |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp; \`---- staging.rb  
+  |&emsp;&emsp;&emsp;\`---- deploy.rb  
+  \`---- lib  
+  &emsp;&emsp;&emsp;\`---- capistrano  
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\`---- tasks 
 
 *注：空白处为`&emsp;`*
 
