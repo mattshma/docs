@@ -124,6 +124,7 @@ markdown语法总结
 *注：空白处为`&emsp;`*
 
 -----
-Reference:  
+Reference:   
+- [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown)
 - [GitHub 风格的 Markdown 语法](https://github.com/cssmagic/blog/issues/13)
 - [Markdown语法说明](http://uliweb.clkg.org/tutorial/view_chapter/32)
