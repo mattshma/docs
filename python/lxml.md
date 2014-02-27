@@ -51,7 +51,7 @@ lxml.html是一个专门处理HTML的包。无论是lxml.html还是lxml.etree都
 - fromstring(html)  
 对 lxml.html,该方法返回`Element`对象，根据参数string是整个文档还是文档片断，选择返回`document_fromstring`或者`fragment_fromstring`。
 
-- parse(filename or url or file-like object^[1]^)   
+- parse(filename or url or file-like object<sup>[1]</sup>)   
 返回一个`ElementTree`对象，而不是`element`对象。可以使用`parse(args).getroot()`得到文档root节点。
 
 [1] file-like object，如`f = StringIO('<foo><bar></bar></foo>')`
