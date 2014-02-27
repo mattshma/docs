@@ -16,15 +16,18 @@ lxml.etree
 
 获取上述这些属性值只需在元素后调用相应属性名即可，如 `element.text`。官网在这方面讲的很详细，此不浪费时间班门弄斧，略。
 
-XPath and XSLT with lxml
+XPath and XSLT with lxml  
 ---
 lxml.xtree为 ElementTree 和 Element 对象中的 **find**, **findall** 和 **findtext**
 等方法提供了一个简单的PATH语法。对于xapth的具体语法可参考xpath教程。
 
-- xpath() and the XPath class
+- xpath() and the XPath class  
+
 > For ElementTree, the xpath method performs a global XPath query against the document (if absolute) or against the root node (if relative)
 > When xpath() is used on an Element, the XPath expression is evaluated against the element (if relative) or against the root tree (if absolute)
-而XPath类返回的值如下
+
+而XPath类返回的值如下 
+
 > The return value types of XPath evaluations vary, depending on the XPath expression used:
 True or False, when the XPath expression has a boolean result
 a float, when the XPath expression has a numeric result (integer or float)
