@@ -23,16 +23,16 @@ lxml.xtree为 ElementTree 和 Element 对象中的 **find**, **findall** 和 **f
 
 - xpath() and the XPath class  
 
-> For ElementTree, the xpath method performs a global XPath query against the document (if absolute) or against the root node (if relative)
+> For ElementTree, the xpath method performs a global XPath query against the document (if absolute) or against the root node (if relative)  
 > When xpath() is used on an Element, the XPath expression is evaluated against the element (if relative) or against the root tree (if absolute)
 
 而XPath类返回的值如下 
 
-> The return value types of XPath evaluations vary, depending on the XPath expression used:
-True or False, when the XPath expression has a boolean result
-a float, when the XPath expression has a numeric result (integer or float)
-a 'smart' string (as described below), when the XPath expression has a string result.
-a list of items, when the XPath expression has a list as result. The items may include Elements (also comments and processing instructions), strings and tuples. Text nodes and attributes in the result are returned as 'smart' string values. Namespace declarations are returned as tuples of strings: (prefix, URI).
+> The return value types of XPath evaluations vary, depending on the XPath expression used:  
+- True or False, when the XPath expression has a boolean result
+- a float, when the XPath expression has a numeric result (integer or float)
+- a 'smart' string (as described below), when the XPath expression has a string result.  
+- a list of items, when the XPath expression has a list as result. The items may include Elements (also comments and processing instructions), strings and tuples. Text nodes and attributes in the result are returned as 'smart' string values. Namespace declarations are returned as tuples of strings: (prefix, URI).
 
 XPath类将传给它的表达式编译为一个可调用的函数：
 
