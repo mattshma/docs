@@ -27,7 +27,7 @@ strace 参数简述
 
     [qualifier=][!]value1[,value2]...
 
-其中`qualifier`的值是trace,  abbrev,  verbose, raw,  signal,  read, 或 write 中的一个，默认值为`trace`，如`-e open`相当于`-e trace=open`，value是一个指定的符号或者数字。
+  其中`qualifier`的值是trace,  abbrev,  verbose, raw,  signal,  read, 或 write 中的一个，默认值为`trace`，如`-e open`相当于`-e trace=open`，value是一个指定的符号或者数字。
 
 - -e trace=set  
 跟踪指定的系统调用，如`trace=open,close,read,write`表示只跟踪这四个系统调用，默认情况下set的值为all，即`trace=all`。当指定系统调用结合`-c`参数时，可能找出程序的瓶颈。
