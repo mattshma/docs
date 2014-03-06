@@ -25,7 +25,7 @@ strace 参数简述
 - -e expr  
 具体格式如下：
 
-     [qualifier=][!]value1[,value2]...  
+    [qualifier=][!]value1[,value2]...  
     
 其中`qualifier`的值是trace,  abbrev,  verbose, raw,  signal,  read, 或 write 中的一个，默认值为`trace`，如`-e open`相当于`-e trace=open`，value是一个指定的符号或者数字。
 
