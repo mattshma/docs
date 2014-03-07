@@ -34,7 +34,7 @@ memcached是一个很大的 `key/value` 缓存系统。有时候需要手动删�
 
     newkey = namespace_name + namespace_version + key
 
-如namespace为'foo'，原本要执行的命令是`set("ten", 10)`，现在将这条命令替换成`set("foo_0001_ten", 10)`。如果需要清除这个namespace下的所有数据，只需要在下一请求过来时`increment(namespace_version)`即可，（设此处变为0002）。这时请求相应会被处理成“foo\_0002\_ten”，而这条key以前是不存在的，memcached返回`mis`，重新请求数据库并缓存结果。之前数据（foo\_0001\_ten）的内存会因为LRU或者expired time到期而被重新分配。
+如namespace为'foo'，原本要执行的命令是`set("ten", 10)`，现在将这条命令替换成`set("foo_0001_ten", 10)`。如果需要清除这个namespace下的所有数据，只需要在下一请求过来时`increment(namespace_version)`即可，（设此处变为0002）。这时请求相应会被处理成“foo\_0002\_ten”，而这条key以前是不存在的，memcached返回`miss`，重新请求数据库并缓存结果。之前数据（foo\_0001\_ten）的内存会因为LRU或者expired time到期而被重新分配。
 
 Data Expiry
 ---
