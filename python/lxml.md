@@ -10,7 +10,7 @@ lxml.etree
 每个element对象都有这几个属性：tag, attrib, text, tail, child elements;如下：
 
 ```python
-<tag attrib="attrib">text<child\_tag></child\_tag></tag>tail
+<tag attrib="attrib">text<child_tag></child_tag></tag>tail
 
 ```
 
