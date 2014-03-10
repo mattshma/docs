@@ -18,7 +18,7 @@ lxml.etree
 
 XPath and XSLT with lxml  
 ---
-lxml.xtree为 ElementTree 和 Element 对象中的 **find**, **findall** 和 **findtext**
+lxml.etree为 ElementTree 和 Element 对象中的 **find**, **findall** 和 **findtext**
 等方法提供了一个简单的PATH语法。对于xapth的具体语法可参考xpath教程。
 
 - xpath() and the XPath class  
