@@ -25,8 +25,8 @@ memcached的命令行语句形式如下：
     cas <key> <flags> <exptime> <bytes> <cas unique> [noreply]\r\n
 
 有几点需要说明的：  
-1. `flags` 在memcached1.2.0及以下版本是一个任意的无符号的16bit整数， 在memcached1.2.1及以上版本是32bit整数。
-2. `exptime`的单位是s，如果该值小于30天（30\*24\*60\*60s），该值可以是相对值，如果该值大于30天，则需为时间的绝对值。若值为0，表示永不过期，除非被LRU删除。
+1. `flags` 在memcached1.2.0及以下版本是一个任意的无符号的16bit整数， 在memcached1.2.1及以上版本是32bit整数。  
+2. `exptime`的单位是s，如果该值小于30天（30\*24\*60\*60s），该值可以是相对值，如果该值大于30天，则需为时间的绝对值。若值为0，表示永不过期，除非被LRU删除。  
 3. memcached新增的CAS协议(Check and Set)是为了解决多个Memcached client **并发** 修改 或者新增item的问题。其类似于“版本号”，只不过只有在新增和修改item时都会增加，删除item版本值不会减小。
 
 in-depth  
@@ -39,11 +39,11 @@ memcached内部不会监视item是否过期，而是在get时查看记录的时�
 
 Using Namespaces
 ---
-memcached是一个很大的 `key/value` 缓存系统。有时候需要手动删除部分有规则的数据，但memcached只提供了一个`flush_all`，这些数据该怎么删除呢？可以参过构建“伪命名空间”来删除一些有规则的数。原理其实很简——使用prefix:key代替原来的key(memcached默认使用“:”作为prefix和key之间分隔符，可通过`-D`设置)：
+memcached是一个很大的 `key/value` 缓存系统。有时候需要手动删除部分有规则的数据，但memcached只提供了一个`flush_all`，这些数据该怎么删除呢？可以参过构建“伪命名空间”来删除一些有规则的数。原理其实很简——使用prefix:key代替原来的key(memcached默认使用 “:” 作为prefix和key之间分隔符，可通过`-D`设置)：
 
     newkey = namespace_name:namespace_version:key
 
-如namespace为"foo"，原本是`set("ten", 10)`，现在将这条命令替换成`set("foo:0001:ten", 10)`。如果需要清除这个namespace下的所有数据，只需要在下一请求过来时`increment(namespace:version)`即可，（若此处变为0002）。这时请求相应会被处理成“foo:0002:ten”，而这条key以前是不存在的，memcached返回`mis`，重新请求数据库并缓存结果。之前数据（foo:0001:ten）的内存会因为LRU或者expired time到期而被重新分配。
+如namespace为"foo"，原本是`set("ten", 10)`，现在将这条命令替换成`set("foo:0001:ten", 10)`。如果需要清除这个namespace下的所有数据，只需要在下一请求过来时`increment(namespace:version)`即可，（若此处变为0002）。这时请求相应会被处理成“foo:0002:ten”，而这条key以前是不存在的，memcached返回`miss`，重新请求数据库并缓存结果。之前数据（foo:0001:ten）的内存会因为LRU或者expired time到期而被重新分配。
 
 Data Expiry
 ---
@@ -61,7 +61,7 @@ Memcached有三种详细模式，参数如下：
 - -vvv  
 输出详细的读写过程，常用来诊断与客户端之间的通信问题
 
-需要指出的是，如果memcached要使用Log，可以通过上述参数之一再重定向至日志文件即可。但Memcached中所有的详细模式都是给调试和测试用的，大量产生这些信息会对繁忙的服务器产生显著的负面影响。同时需注意到，将错误信息输出，尤其是重定向至磁盘，可能会抵消memcached带来的性能上的增长。因此如非必需，实际生产环境和发布环境不推荐使用<pre>[0]</pre>。
+需要指出的是，如果memcached要使用Log，可以通过上述参数之一再重定向至日志文件即可。但Memcached中所有的详细模式都是给调试和测试用的，大量产生这些信息会对繁忙的服务器产生显著的负面影响。同时需注意到，将错误信息输出，尤其是重定向至磁盘，可能会抵消memcached带来的性能上的增长。因此如非必需，实际生产环境和发布环境不推荐使用<sup>[0]</sup>。
 
 Memcached Statistics
 ---
@@ -85,20 +85,21 @@ Memcached Statistics
 
 slab automove
 ---
-一般的命令是`-o slab_reassign,slab_automove`，如果一个slab class在10s内eviction的次数达到3次或以上，将会从一个最近30s内eviction次数为0的slab class中获取一个page来存储数据<pre>[1]</pre>。 slab\_automove需要启用slab\_reassign.  
+一般的命令是`-o slab_reassign,slab_automove`，如果一个slab class在10s内eviction的次数达到3次或以上，将会从一个最近30s内eviction次数为0的slab class中获取一个page来存储数据<sup>[1]</sup>。 slab\_automove需要启用slab\_reassign。
+
 slab_automove有3个值：
 - 0  
 关闭slab automove  
 - 1  
 默认值，将会移动src page和dest page,每10s检查一次。
 - 2  
-采取极其积极的page再分配算法，在每一次eviction时，将会移入一个page至这个slab class<pre>[2]</pre>。
+采取极其积极的page再分配算法，在每一次eviction时，将会移入一个page至这个slab class<sup>[2]</sup>。
 
 annotation
 ---
-[0]: [memcached Logs](http://docs.oracle.com/cd/E17952_01/refman-5.6-en/ha-memcached-using-logs.html)
-[1]: [Memcached 1.4.11 Release Notes](http://code.google.com/p/memcached/wiki/ReleaseNotes1411)
-[2]: [Memcached 1.4.14 Release Notes](http://code.google.com/p/memcached/wiki/ReleaseNotes1414)
+[0]: [memcached Logs](http://docs.oracle.com/cd/E17952_01/refman-5.6-en/ha-memcached-using-logs.html)  
+[1]: [Memcached 1.4.11 Release Notes](http://code.google.com/p/memcached/wiki/ReleaseNotes1411)  
+[2]: [Memcached 1.4.14 Release Notes](http://code.google.com/p/memcached/wiki/ReleaseNotes1414)  
 
 List of Reference
 -----
