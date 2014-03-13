@@ -106,4 +106,4 @@ List of Reference
 - [memcached's protocol.txt](https://github.com/memcached/memcached/blob/master/doc/protocol.txt)
 - [NewPerformance](http://code.google.com/p/memcached/wiki/NewPerformance)
 - [Using MySQL with memcached](http://docs.oracle.com/cd/E17952_01/refman-5.0-en/ha-memcached-using.html)
-
+- [NewConfiguringClient](http://code.google.com/p/memcached/wiki/NewConfiguringClient)
