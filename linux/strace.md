@@ -44,14 +44,14 @@ strace 参数简述
 Usages
 ---
 
-- 找出配置文件
+- 找出配置文件  
 ```c
 strace -e open php 2>&1 | grep php.ini
 ```
-- strace -p pid
+- strace -p pid  
  有时候进程会hang住，可以通过`strace -p pid`查看该进程在哪里hang住的。当遇到问题时多使用"strace -p"能省去很多猜想的工作，有时也可以省掉重启app来使用扩展和重编译扩展的工作。
 
-- 为什么不能连接到对方？
+- 为什么不能连接到对方？  
  当DNS挂掉，连接hang住时，可以使用tcptump来进行抓包。也可以使用strace只返回这个程序的结果。
 
 List Of Reference
