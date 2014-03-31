@@ -23,7 +23,7 @@ Command-line expansion
 ---
 
 ### 命令替换
-在bash中，允许将命令的标准输出当变量值一样使用，其语法为：`$(commands)` 或 `\`\``，建议使用前一种方式，后一种是老样式了 。如以下例子：
+在bash中，允许将命令的标准输出当变量值一样使用，其语法为：`$(commands)` 或 <code>::before"``"::after</code>，建议使用前一种方式，后一种是老样式了 。如以下例子：
 
     $ echo $PWD
     $ /home/lucky
