@@ -72,8 +72,8 @@ Command-line expansion
   ${var##pattern\*} | 从var头部与pattern进行最大匹配，并删除匹配到的内容
   ${var/pattern/string} <sup>[3]</sup>|使用string替换pattern的最大匹配部分
 
-- [1]: *根据需要可以位于pattern之前，也可以位于pattern之后。如`echo ${0%/*}`返回当前文件的父目录路径
-- [2]: *根据需要可以位于pattern之前，也可以位于pattern之后
+- [1]: \*根据需要可以位于pattern之前，也可以位于pattern之后。如`echo ${0%/*}`返回当前文件的父目录路径
+- [2]: \*根据需要可以位于pattern之前，也可以位于pattern之后
 - [3]: 如果pattern以`/`开关则进行全局替换，否则只替换第一个匹配的位置。如果pattern以`#`开始，则起始位置必须匹配，如果以`%`开始则结尾部分必须匹配
 
 #### 算术扩展
