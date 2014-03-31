@@ -66,7 +66,7 @@ Command-line expansion
   ${var:offset} | 返回var中从offset开始的字符串
   ${var:(+/-)offset:length} | 返回var中从(倒数)offset开始长为length的字符串
   ${#var}       | 返回var的字符长度
-  ${var%\*pattern}<sup>[1]</sup> | 从var尾部与pattern进行最小匹配，并删除匹配到的部分
+  ${var%\*pattern<sup>[1]</sup>} | 从var尾部与pattern进行最小匹配，并删除匹配到的部分
   ${var%%\*pattern} | 从var尾部与pattern进行最大匹配，并删除匹配到的部分
   ${var#pattern\*<sup>[2]</sup>}| 从var头部与pattern进行最小匹配，并删除匹配到的内容
   ${var##pattern\*} | 从var头部与pattern进行最大匹配，并删除匹配到的内容
