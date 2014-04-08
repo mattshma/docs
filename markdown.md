@@ -40,8 +40,6 @@ markdown语法总结
 
 *注意表格上下均有空行*  
  
-如
- 
 ~~~ 
     歌曲名  |  歌手
  ----------|--------
@@ -70,13 +68,13 @@ markdown语法总结
             print("hello world");           
         }
             
-注意在一级列表中，代码块前面需要8个空格，在二级列表中，代码块前面需要12个空格，依此类推。
+  注意在一级列表中，代码块前面需要8个空格，在二级列表中，代码块前面需要12个空格，依此类推。
 
 - \` \`表示代码片断 
 
         `print("hello world")`
 
-在github显示为 `print("hello world")`
+  在github显示为 `print("hello world")`
  
 - \`\`\`表示加强型的代码块  
  
@@ -84,11 +82,11 @@ markdown语法总结
         print "hello world"
         ```
  
-在github的显示是  
+  在github的显示是  
 
-    ```ruby
-    pint "hello world"
-    ```
+        ```ruby
+         pint "hello world"
+        ```
 
 缩进   
 ---
@@ -101,9 +99,9 @@ markdown语法总结
           
 在github中表示如下：
 
-> - list
->  - list
->    - list
+    > - list
+    >  - list
+    >    - list
 
 而如果列表下有文本，希望文本和列表对齐，则文本每次以 **4** 个空格的方式缩进。
 
