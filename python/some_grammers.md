@@ -9,7 +9,7 @@ utf-8
 
     SyntaxError: Non-ASCII character '\xe4' in file /bookstore/app/views.py on line 10, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details
 
-这里需要加上自己使用的文件编码，参照(http://legacy.python.org/dev/peps/pep-0263/)[PEP 0263 -- Defining Python Source Code Encodings]，这里有几种写法，其中最常见的是
+这里需要加上自己使用的文件编码，参照[PEP 0263 -- Defining Python Source Code Encodings](http://legacy.python.org/dev/peps/pep-0263/)，这里有几种写法，其中最常见的是
 
     # -*- coding: utf-8 -*-
 
