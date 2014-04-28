@@ -40,7 +40,7 @@ http\_resp\_size的内存是从worker workspace(参数thread\_pool\_workspace)�
 修改VCL配置文件
 ---
 ### Ignore cache headers from the backend
-修改vcl_fetch
+修改vcl_fetch  
 Some backends send headers that tell varnish not to cache elements. 
 
 ```
@@ -53,6 +53,9 @@ Some backends send headers that tell varnish not to cache elements.
 ```
 
 ### grace mode
+设置grace模式  
+
+```
 sub vcl_fetch {
   set beresp.grace = 5m;
 }
@@ -64,6 +67,7 @@ sub vcl_recv {
         set req.grace = 15s;
     }
 }
+```
 
 others
 ---
