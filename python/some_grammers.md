@@ -7,6 +7,13 @@ Encode and Decode
 ---
 Python有两种类型的字符串类型：字节字符串和Unicode字符串。Python根据电脑默认的locale设置将字节流转化成字符，而大部分系统locale设置为ACSII编码。
 
+可以使用如下方法查看一个字符串是不是Unicode字符串:
+
+```python
+if isinstance(str, unicode):
+    pass;	
+```
+
 若想改变Python编码格式为其他编码格式，如UTF-8，有如下3种方法。
 
 ### sys.setdefaultencoding('utf-8')
