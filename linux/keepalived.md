@@ -132,6 +132,8 @@ vrrp_instance VI_1 {
 - $2 = name of group or instance
 - $3 = target state of transition (“MASTER”, “BACKUP”, “FAULT”)
 
+关于`mcast_src_ip`的一些说明：`mcast_src_ip`指定发送vrrp广播的源地址，所以这里就需要注意，如果高权重机器上指定`mcast_src_ip`为低权重机器IP，那么两个机器都将有VIP，除了低权重机器认为VIP在本机这里外，其他机器都会认为VIP为高权重机器。另外，如果设置`nopreempt`之后，若低权重机器指定`mcast_src_ip`为高权重机器，则相当于没有设置`nopreempt`，高权重机器会自动抢占成为MASTER。
+
 vrrp\_script and track\_script
 ---
 除了使用`notify`来指定运行脚本外，还可以使用`vrrp_script`来运行脚本。如下：
