@@ -1,11 +1,15 @@
-Some Grammers
+Unicode、ASCII and UTF-8
 ===
+
+Introduce
+---
+首先明确计算机中一切均为byte，硬盘中文件是以byte进行存储的，网络传输也是以byte为单位进行的。在最开始，为了表示英文字母和符号，将这些文字符号与byte一一对应，即所谓的ASCII码。随着非英文文字的增加，ASCII已不能满足需求，而发展出各种各样的字符集，遗憾的是这些字符集不能相互兼容。Unicode就是为了解决这个问题而发展出来的，它给每个字符分配一个
 
 以下是在使用Python过程中遇到的一些问题，将之整理如下
 
 Encode and Decode
 ---
-Python有两种类型的字符串类型：字节字符串和Unicode字符串。Python根据电脑默认的locale设置将字节流转化成字符，而大部分系统locale设置为ACSII编码。
+Python有两种类型的字符串类型：str字符串和Unicode字符串。Python根据电脑默认的locale设置将字节流转化成字符，而大部分系统locale设置为ACSII编码。
 
 可以使用如下方法查看一个字符串是不是Unicode字符串:
 
@@ -61,6 +65,9 @@ sys.setdefaultencoding('utf-8')
 
 Referece
 ---
+- [Pragmatic Unicode](http://nedbatchelder.com/text/unipain.html)
+- [Unicode](http://www.cl.cam.ac.uk/~mgk25/unicode.html)
+- [Why do we need Unicode?](http://stackoverflow.com/questions/2241348/what-is-unicode-utf-8-utf-16)
 - [Unicode HOWTO](https://docs.python.org/2/howto/unicode.html)
 
 
