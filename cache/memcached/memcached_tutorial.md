@@ -17,6 +17,9 @@ Some memcached options
 - -D  
 设置 key prefixs 和 IDs 之间的分隔符。默认分隔符是 `:`，如果指定该参数，数据统计功能自动开启。如果没有使用，可以使用 `stats detail on` 来启动。
 
+- -c  
+设置连接数，默认值为1024。当连接数较多时，此值需要相应调整，否则会出现部分连接timeout的情况。
+
 commands
 ---
 memcached的命令行语句形式如下：  
@@ -95,11 +98,18 @@ slab_automove有3个值：
 - 2  
 采取极其积极的page再分配算法，在每一次eviction时，将会移入一个page至这个slab class<sup>[2]</sup>。
 
+some questions
+---
+
+### timeout
+参考[memcached timeout](http://code.google.com/p/memcached/wiki/Timeouts)的处理过程。
+
+
 annotation
 ---
-[0]: [memcached Logs](http://docs.oracle.com/cd/E17952_01/refman-5.6-en/ha-memcached-using-logs.html)  
-[1]: [Memcached 1.4.11 Release Notes](http://code.google.com/p/memcached/wiki/ReleaseNotes1411)  
-[2]: [Memcached 1.4.14 Release Notes](http://code.google.com/p/memcached/wiki/ReleaseNotes1414)  
+- [0]: [memcached Logs](http://docs.oracle.com/cd/E17952_01/refman-5.6-en/ha-memcached-using-logs.html)  
+- [1]: [Memcached 1.4.11 Release Notes](http://code.google.com/p/memcached/wiki/ReleaseNotes1411)  
+- [2]: [Memcached 1.4.14 Release Notes](http://code.google.com/p/memcached/wiki/ReleaseNotes1414)  
 
 List of Reference
 -----
