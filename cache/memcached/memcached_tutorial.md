@@ -9,16 +9,26 @@ Some memcached options
 内存不够时禁止LRU，并返回一个错误
 
 - -I  
-指定slab大小，默认是1M，最小是1K，最大是128M
+指定能存储的最大对象的大小，默认是1M，最小是1K，最大是128M
 
 - -n  
 初始（最小）chunk的大小（byte），默认是48byte
 
 - -D  
-设置 key prefixs 和 IDs 之间的分隔符。默认分隔符是 `:`，如果指定该参数，数据统计功能自动开启。如果没有使用，可以使用 `stats detail on` 来启动。
+设置 key prefixs 和 IDs 之间的分隔符。默认分隔符是 `:`，如果指定该参数，数据统计功能自动开启。如果没有使用，可以使用 `stats detail on` 来启动
 
 - -c  
-设置连接数，默认值为1024。当连接数较多时，此值需要相应调整，否则会出现部分连接timeout的情况。
+设置连接数，默认值为1024。当连接数较多时，此值需要相应调整，否则会出现部分连接timeout的情况
+
+Slab Allocate
+---
+memcached使用预分配方式分配内存，这里有几个概念：
+
+- slab  
+- page  
+- chunk  
+
+默认情况下，一个 page 大小为1M，根据初始 chunk 的大小（48b）和增长因子的大小，可以得出会有多少个slab class. 每个slab可以由多个 page 构成。当一个 slab 没存储对象时，memcached不会向这个 slab 分配 page，当 slab 不够时，memcached会向这个 slab 分配 page。
 
 commands
 ---
@@ -97,6 +107,11 @@ slab_automove有3个值：
 默认值，将会移动src page和dest page,每10s检查一次。
 - 2  
 采取极其积极的page再分配算法，在每一次eviction时，将会移入一个page至这个slab class<sup>[2]</sup>。
+
+
+memcached-tool
+---
+memcached提供了 memcached-tool 这个工具，通过这个工具我们可以看到 memcached 的一些使用情况。如有时候某些 slab 会出现较多的 evicted，通过 memcached-tool 得到 slab 的分配和使用情况后，我们可以优化下增长因子和初始 chunk 大小，一般来说增长因子过大，会浪费一些内存；而增长因子过小，意味 slab 多，eviction queue也会增加，如果未来存储对象大小发生变化，就有更多的内存碎片，当然，重启memcached会解决这个问题。总之，根据情况设定增长因子。
 
 some questions
 ---
