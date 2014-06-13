@@ -36,7 +36,8 @@ nmap 支持 CIDR 风格的地址。可以附加一个 `/<numbit>` 在一个IP地
 - -P0 （无ping）  
  该选项完全跳过Nmap发现阶段。默认情况下 Nmap 只对正在运行的主机进行高强度的探测，使用`-P0`后，就好像指定的目标IP都是运行的并对其进行所要求的扫描。
 
-- -PS [portlist] (TCP SYN Ping)
+- -PS [portlist]   
+ 该选项发送一个设置了SYN标志位的空TCP报文。
 
 
 端口扫描
