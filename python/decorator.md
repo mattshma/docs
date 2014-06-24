@@ -8,7 +8,7 @@ Decorator
 Reference
 ---
 
-- [How can I make a chain of function decorators in Python?](http://stackoverflow.com/questions/739654/how-can-i-make-a-chain-of-function-decorators-in-python/1594484#1594484）  
+- [How can I make a chain of function decorators in Python?](http://stackoverflow.com/questions/739654/how-can-i-make-a-chain-of-function-decorators-in-python/1594484#1594484)
 - [理解python中的装饰器](http://wklken.me/posts/2013/07/19/python-translate-decorator.html#)  
 - [装饰器与函数式Python](http://youngsterxyf.github.io/2013/01/04/Decorators-and-Functional-Python/)  
 
