@@ -102,7 +102,7 @@ Calculator.prototype = {
 
 以下是mollypages关于原型的一张图：
 
-![JavaScript原型链](img/js_prototype_chain.jpg)
+![JavaScript原型链](../img/js_prototype_chain.jpg)
 
 下面是一个测试代码：
 
