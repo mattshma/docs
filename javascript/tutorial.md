@@ -165,7 +165,117 @@ return foo;
 
 可以看到，`Object` 和 `Function` 相互影响， `Function` 继承自 `Object`，而 `Object.__proto__ === Function.prototype`。
 
+Execution Context
+---
 
+每次代码的执行都需要相应的上下文（即运行环境），这个上下文的执行过程分为以下两个阶段：
+
+1. 建立阶段：
+ - 建立variable object(VO)
+ - 建立Scope Chain
+ - 确定this 
+
+2. 代码执行阶段：
+ 执行函数中的代码
+
+在函数中，VO被表示为活动对象（activation object）
+
+### Scope Chain
+一个作用域链由该函数的 activation object 及父类的 variable object 组成。`with`等可以对作用域链产生影响。
+
+注意：**函数对象的作用域链是在定义函数时决定的，而不是在调用时**。 eg：
+
+```
+var x = 1;
+function echo() {
+    console.log(x)
+}
+
+function env() {
+    var x = 2;
+    echo();
+}
+
+env();
+```
+
+运行结果为`1`. echo()的上下文中name始终为`1`。
+
+根据以上说明，当定义一个函数时，会保存一个作用域链；当调用这个函数时，会创建一个活动对象，并将调用该函数时的每个**形参**都做为该活动对象的属性。再将这个活动对象加到定义时的作用域链最顶端，做为调用该函数时的作用域链。在查找变量x的值时，会从作用域链中的第一个对象开始查找，如果没有找到，则继续查找链上下一个对象，依此类推。
+
+闭包
+---
+
+只要外部函数的变量都存在，那么从内部函数访问这些外部数据没什么特别的；那什么是闭包呢？简单来说闭包是外部函数执行完后其资源不被释放，因为其内部函数的执行仍需要引用外部函数的资源。因此闭包有两个条件：1. 在一个函数内定义另外一个函数，2. 返回（return）内部函数。
+
+如果内部函数没有被返回，即内部函数和外部函数互相引用，在执行完外部函数后，两个函数都会被GC回收。
+
+### 闭包的应用
+---
+
+闭包可以用于以下场景：
+
+- 隐藏内部变量
+
+```
+counter = (function(){
+    var count = 0
+    return function(){
+        console.log(count += 1)
+    }
+})()
+counter()          // 1
+counter()          // 2
+```
+
+- curry
+ 有时候对于某些函数，仅仅需要传递部分参数，如下：
+
+```
+function add(x, y) {
+return x + y;
+}
+
+add(5, 4);             // 9
+
+// step 1 -- 传递部分参数
+function add(5, y) {  // SyntaxError: missing formal parameter
+    return 5 + y;     
+}
+// step 2 -- 传递参数
+function add(5, 4) {  // SyntaxError: missing formal parameter
+    return 5 + 4;
+}  
+```
+
+这里可以使用嵌套函数，将参数分部分传入这些函数中，如下
+
+```
+function add(x, y) {
+    var oldx = x, oldy = y;
+    if (typeof oldy === "undefined") { // partial
+        return function (newy) {
+            return oldx + newy;
+        };
+    }
+    // full application
+    return x + y;
+}  
+```
+
+这样的处理方式叫做curry化。
+
+上面这个例子可以写作
+
+```
+var add = function(a) {
+    return function(b) {
+        return a + b;
+    }
+}
+
+add(1)(2);   //3
+```
 
 Reference
 ---
@@ -174,3 +284,4 @@ Reference
 - [How prototypal inheritance really works](http://blog.vjeux.com/2011/javascript/how-prototypal-inheritance-really-works.html)
 - [JavaScript核心](http://www.cnblogs.com/TomXu/archive/2012/01/12/2308594.html)
 - [Object.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)
+- [JavaScript curry](http://blog.csdn.net/qq838419230/article/details/8535978)
