@@ -51,6 +51,7 @@ var o = new Object();
 ```
 
 #### Object.create()
+
 在说 `Object.create()` 方法之前，先说下原型。每个JavaScript对象（null除外）都和原型对象相关联。所有通过对象直接量创建的对象都具有同一个原型对象，可以使用 `Object.prototype` 来获得对原型对象的引用。通过 `new` 和构造函数创建的对象的原型就是构造函数的 prototype 属性值。
 
 `Object.create()` 的提供两个参数，第一个是对象的原型，第二个是可选的，用来对对象的属性进行进一步的描述。如下：
@@ -62,6 +63,7 @@ var o2 = Object.create(Object.prototype);  // 与{}和new Object()一样。
 
 原型
 ---
+
 JavaScript 中类的实现不是基于类继承方式，而是基于原型继承。如果两个实例都是从同一个原型对象上继承属性，则它们是同一个类的实例（duck-typing）。
 
 对于如下代码：
@@ -95,6 +97,7 @@ Calculator.prototype = {
     } 
 }
 ```
+
 以后可以通过new得到一个Calculator对象，然后调用其方法。
 
 ### 原型链
@@ -170,15 +173,15 @@ Execution Context
 
 每次代码的执行都需要相应的上下文（即运行环境），这个上下文的执行过程分为以下两个阶段：
 
-1. 建立阶段：
- - 建立variable object(VO)
- - 建立Scope Chain
- - 确定this 
+1. 建立阶段：  
+ - 建立variable object(VO)  
+ - 建立Scope Chain   
+ - 确定this   
 
-2. 代码执行阶段：
+2. 代码执行阶段：  
  执行函数中的代码
 
-在函数中，VO被表示为活动对象（activation object）
+在函数中，VO被表示为活动对象（activation object）.
 
 ### Scope Chain
 一个作用域链由该函数的 activation object 及父类的 variable object 组成。`with`等可以对作用域链产生影响。
@@ -236,7 +239,7 @@ counter()          // 1
 counter()          // 2
 ```
 
-- curry
+- curry  
  有时候对于某些函数，仅仅需要传递部分参数，如下：
 
 ```
