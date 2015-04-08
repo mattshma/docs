@@ -6,15 +6,15 @@ Ubuntu12.02安装MegaCLI
 Ubunut中有如下两种方法来安装。
 
 1. apt-get安装
-- 修改`/etc/apt/sources.list`，增加 `deb http://hwraid.le-vert.net/ubuntu precise main`
-- 增加apt-key：`wget -O - http://hwraid.le-vert.net/debian/hwraid.le-vert.net.gpg.key | sudo apt-key add -`
-- apt-get update
-- apt-get install megacli megactl megaraid-status
+ - 修改`/etc/apt/sources.list`，增加 `deb http://hwraid.le-vert.net/ubuntu precise main`
+ - 增加apt-key：`wget -O - http://hwraid.le-vert.net/debian/hwraid.le-vert.net.gpg.key | sudo apt-key add -`
+ - apt-get update
+ - apt-get install megacli megactl megaraid-status
 
 2. 下载zip包安装
-- 下载[MegaCLI](http://www.lsi.com/support/Pages/download-results.aspx?keyword=megacli)
-- 解压`unzip MegaCli.zip`
-- 进入相应目录后，运行`rpm2cpio MegaCli-*.rpm | cpio -idmv`，即安装完成。
+ - 下载[MegaCLI](http://www.lsi.com/support/Pages/download-results.aspx?keyword=megacli)
+ - 解压`unzip MegaCli.zip`
+ - 进入相应目录后，运行`rpm2cpio MegaCli-*.rpm | cpio -idmv`，即安装完成。
 
 查看Raid
 ---
