@@ -4,8 +4,8 @@ MegaCLI的说明
 Ubuntu12.02安装MegaCLI
 ---
 Ubunut中有如下两种方法来安装。
-1. 修改APT源
-首先修改apt源，然后安装。
+
+1. apt-get安装
 - 修改`/etc/apt/sources.list`，增加 `deb http://hwraid.le-vert.net/ubuntu precise main`
 - 增加apt-key：`wget -O - http://hwraid.le-vert.net/debian/hwraid.le-vert.net.gpg.key | sudo apt-key add -`
 - apt-get update
