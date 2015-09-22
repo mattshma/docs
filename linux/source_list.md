@@ -48,8 +48,21 @@ ubuntu/
 ```
 在写.list文件时，语法如下：
 
-`deb uri distribution [component1] [component2] [...]`
-其中uri是apt源的地址，而distribution是发布版本，component为发布版本中的各组件，如:
+`deb/deb-src [options] uri distribution [component1] [component2] [...]`
+Archive type说明文件的归档类型，有`deb`和`deb-src`两种，`deb`说明归档文件中包含二进制包和预编译包，deb-src说明是源文件，其包括原始代码文件和Debian控制文件(.dsc)和diff.gz。
+
+options是由一个或多个`setting=value`形式的setting构成的，多个setting之间由空格分隔，其有如下形式：
+
+- arch=arch1,arch2,..   
+ 说明何种cpu架构才能下载该文件。如果未指定，则`APT:Architectures`中定义的所有cpu架构都能下载。
+
+- arch+=arch1,arch2,.. 和 arch-=arch1,arch2,...    
+ 包括/不包括该种架构能下载
+
+- trusted=yes    
+ 说明源是一直是经过验证的，即使Release file 没有签名。
+
+uri是apt源的地址，而distribution是发布版本，component为发布版本中的各组件，如:
 
 ```
 deb [arch=amd64] http://10.10.x.x/ubuntu/precise/amd64/cm/ precise-cm5.0.1 contrib 
@@ -112,3 +125,8 @@ gpgcheck=0
 其中`$releasever`为`6.5`，`$basearch`为`x86_64`即找到上述结构中的rpm包。
 
 
+参考
+---
+
+- [SOURCES.LIST(5)](http://manpages.debian.org/cgi-bin/man.cgi?sektion=5&query=sources.list&apropos=0&manpath=sid&locale=en)
+- [SourceList](https://wiki.debian.org/SourcesList)
