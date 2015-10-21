@@ -19,7 +19,7 @@
 
 ### mysqld_multi
 
-如果一台服务器上需要运行多个mysql实例的话，使用[mysqld_multi](https://dev.mysql.com/doc/refman/5.6/en/mysqld-multi.html)方式。在my.cnf中，通过指定不同的GNR(group number)来分不同的组，如[mysqld **N** ]，若这些组有相同的配置，可以放在[mysqld]组中。启动某组实例的语法如:`shell> mysqld_multi [options] {start|stop|reload|report} [GNR[,GNR] ...]`。
+如果一台服务器上需要运行多个mysql实例的话，使用[mysqld_multi](https://dev.mysql.com/doc/refman/5.6/en/mysqld-multi.html)方式。在my.cnf中，通过指定不同的GNR(group number)来分不同的组，如[mysqld**N**]，若这些组有相同的配置，可以放在[mysqld]组中。启动某组实例的语法如:`shell> mysqld_multi [options] {start|stop|reload|report} [GNR[,GNR] ...]`。
 
 
    启动方式   |  读取配置组
