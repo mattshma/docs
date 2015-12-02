@@ -58,7 +58,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 ```
 
-**为什么在reload(sys)**
+**为什么要reload(sys)**
 > 为什么要reload sys模块,先看下python的模块加载过程:
 >
 > ```python
@@ -78,6 +78,10 @@ sys.setdefaultencoding('utf-8')
 >      del sys.setdefaultencoding
 > 在sys加载后,setdefaultencoding方法被删除了,所以我们要通过重新导入sys来设置系统编码。
 
+**更新**
+
+这种方法不太推荐，可参考：[Why sys.setdefaultencoding() will break code](https://anonbadger.wordpress.com/2015/06/16/why-sys-setdefaultencoding-will-break-code/)和[Dangers of sys.setdefaultencoding('utf-8')](http://stackoverflow.com/questions/28657010/dangers-of-sys-setdefaultencodingutf-8)。
+
 ### #-*- encoding: utf-8 -*-
 参照[PEP 0263 -- Defining Python Source Code Encodings](http://legacy.python.org/dev/peps/pep-0263/)，这里有几种写法，其中最常见的是
 
@@ -91,6 +95,84 @@ sys.setdefaultencoding('utf-8')
 > decode([encoding], [errors]) interprets the string using the given encoding
 
 如encode('utf-8')用utf-8将字符串编码为unicode字符串。decode('utf-8')将unicode字符串解码为utf-8字符串。
+
+### 实际应用
+
+在实际应用中，通过连接数据库，来读取文件，为保证数据不乱码。有如下地方需要注意：
+
+#### MySQL服务器配置文件配置
+
+[配置](http://dev.mysql.com/doc/refman/5.7/en/charset-server.html)如下：
+
+```
+[mysqld]
+init-connect='SET NAMES utf8'
+character-set-server=utf8
+collation-server=utf8_general_ci
+
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+```
+
+#### MySQL的database和表
+
+[DataBase](http://dev.mysql.com/doc/refman/5.7/en/charset-database.html)的编码设置如下：
+
+```
+CREATE DATABASE db_name CHARACTER SET utf-8
+```
+
+[Table](http://dev.mysql.com/doc/refman/5.7/en/charset-table.html)的编码设置如下：
+
+```
+CREATE TABLE tbl_name (column_list) ENGINE=InnoDB DEFAULT CHARSET=utf8
+```
+
+#### python 设置
+设置python文件格式:`# -*- coding: utf-8 -*-`。
+
+#### MySQL实例设置
+
+初始化mysql连接时，指定utf-8:
+
+```
+import MySQLdb
+
+conn = MySQLdb.connect(host, user, password, database, charset='utf8')
+```
+
+#### dict的设置
+
+上述设置后，一般的问题都能解决，但对于dict和list而言，对于非ascii值仍会出现乱码。原因见[这里](https://docs.python.org/2/library/json.html#basic-usage)。
+
+如:
+```
+>>> test=['a', '1', '测试']
+>>> test
+['a', '1', '\xe6\xb5\x8b\xe8\xaf\x95']
+```
+若要正确输出，需要encode为utf-8，如下：
+```
+# -*- coding: utf-8 -*-
+import json
+
+test1 = ['a', '1', '测试']
+print json.dumps(test1, encoding="UTF-8", ensure_ascii=False)
+
+test2 = {'key': '测试'}
+print json.dumps(test2, encoding="UTF-8", ensure_ascii=False)
+```
+运行脚本，输出结果如下：
+```
+> python test.py
+["a", "1", "测试"]
+{"key": "测试"}
+```
+
+
 
 Referece
 ---

@@ -5,8 +5,8 @@ __init__.py
 ---
 在实际使用的过程中，不知道怎么导入`__init__.py`中定义的变量，现说明下。
 
-- The __init__.py files are required to make Python treat the directories as containing packages. In the simplest case, __init__.py can just be an empty file, but it can also execute initialization code for the package or set the __all__ variable.  
-- Import some files  originally at the Class level into __init__.py to make it available at the package level.  
+- The \_\_init\_\_.py files are required to make Python treat the directories as containing packages. In the simplest case, \_\_init\_\_.py can just be an empty file, but it can also execute initialization code for the package or set the \_\_all\_\_ variable.  
+- Import some files  originally at the Class level into \_\_init\_\_.py to make it available at the package level.  
 
 ```python
 package/
@@ -20,10 +20,10 @@ package/
         submodule2.py
 ```
 
-In this example we can say that file.py has the Class File. So without anything in our __init__.py you would import
+In this example we can say that file.py has the Class File. So without anything in our \_\_init\_\_.py you would import
 with this syntax: `from package.file import File`.
 
-However we can import File into your __init__.py to make it available at the package level:
+However we can import File into your \_\_init\_\_.py to make it available at the package level:
 
 ```python
 # in your __init__.py
