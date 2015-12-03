@@ -26,19 +26,27 @@ Unicode
 ---
 在上世纪80年代后期，除了 ISO 为了解决字符的问题，众多软件生产商也发起 Unicode 项目来解决这个问题。到90年代时，双方都意识到世界不需要两套不兼容的字符集，于是双方开始合并双方的工作成果。Unicode实现了 Level 3 的基本多平种平面，由于 Unicode方便记忆，因此使用的更加广泛。
 
+Unicode 指定字符和code point(类型为integer)一一对应，其有1百多万个 code points，而目前只使用了110,000多个，因此有充足的空间来应对未来的增长。
 
 UTF-8
 ---
-UCS 和 Unicode 仅仅是一个指定了整数与字符间对应关系的字符集。对于一系列的bytes而言，存在若干种字符序列和它们对应的整数值序列，最明显的以 2 个byte 或 4 个byte对字符及对应的整数值进行编码，这两种编码方式分别叫 UCS-2 和 UCS-4。但是在unix世界中，使用 UCS-2 和 UCS-4 会包含像 `\0` 和 `/` 等具有特殊意思的字符。
+UCS 和 Unicode 仅仅是一个指定了code point（整数）与字符间对应关系的字符集，其解决了ASCII只有256个字符的问题，但正如文章开着所言：计算机中的一切皆为byte，对于一系列的bytes而言，存在若干种字符序列和它们对应的code point序列，最明显的以 2 个byte 或 4 个byte对字符及对应的code point进行存储，这种对应关系称为编码(encode)，而这两种编码方式分别叫 UCS-2 和 UCS-4。但是在unix世界中，使用 UCS-2 和 UCS-4 会包含像 `\0` 和 `/` 等具有特殊意思的字符。
 
 UTF-8 是一种可变长字符编码，它可以用来表示 Unicode 标准中的任何字符，且编码的第一个字节仍与 ASCII 兼容。因此 UTF-8 逐渐成为最流行的对 Unicode 进行传播和存储的编码方式。
 
 
-以下是在使用Python过程中遇到的一些问题，将之整理如下
+以下是在使用Python过程中遇到的一些问题，将之整理如下。
 
-Encode and Decode
+str和unicode
 ---
-Python有两种类型的字符串类型：str字符串和Unicode字符串。Python根据电脑默认的locale设置将字节流转化成字符，而大部分系统locale设置为ACSII编码。
+Python2中有两种不同的string类型：`str`和`unicode`，这两种类型都继承自basestring对象。`str`对象存储的是byte，当字符串前有前缀"u"时，其是一个`unicode`对象，`unicode`对象存储的是code point。`str`类型和`unicode`类型各有方法可互相转换：
+
+```
+unicode.encode() --> bytes
+bytes.decode() --> unicode
+```
+
+在python3中，str类型即为python2的unicode类型，bytes类型即为python2的str类型。
 
 可以使用如下方法查看一个字符串是不是Unicode字符串:
 
@@ -93,8 +101,6 @@ sys.setdefaultencoding('utf-8')
 以下是Decode和Encode的定义：
 > encode([encoding], [errors='strict']), which returns an 8-bit string version of the Unicode string, encoded in the requested encoding.
 > decode([encoding], [errors]) interprets the string using the given encoding
-
-如encode('utf-8')用utf-8将字符串编码为unicode字符串。decode('utf-8')将unicode字符串解码为utf-8字符串。
 
 ### 实际应用
 
