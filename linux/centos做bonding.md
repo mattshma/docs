@@ -4,6 +4,16 @@
 
 ## 过程
 
+### 操作系统是否开启/支持bonding操作
+操作如下：
+
+```
+# modinfo bonding                  ; bonding模块是否已编译到内核，centos一般默认编译到内核中了。
+# modprobe bonding                 ; 若已编译，则加载bonding模块到内核中
+# lsmod | grep bonding             ; 查看是否加载成功
+# echo "modprobe bonding" > /etc/rc.local  ; 开机加载bonding模块
+```
+
 ### 修改配置文件
 
 - 新建`/etc/sysconfig/network-scripts/ifcfg-bond0`，配置如下：
