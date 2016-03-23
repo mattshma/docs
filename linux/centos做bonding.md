@@ -11,7 +11,7 @@
 # modinfo bonding                  ; bonding模块是否已编译到内核，centos一般默认编译到内核中了。
 # modprobe bonding                 ; 若已编译，则加载bonding模块到内核中
 # lsmod | grep bonding             ; 查看是否加载成功
-# echo "modprobe bonding" > /etc/rc.local  ; 开机加载bonding模块
+# echo "modprobe bonding" >> /etc/rc.local  ; 开机加载bonding模块
 ```
 
 ### 修改配置文件
@@ -50,7 +50,7 @@ SLAVE=yes
 
 ### 绑定eth0和eth1到bonding池中
 
-执行`ifenslave bond0 eth0 eth1 > /etc/rc.local`，向bonding池中加入实际网络接口设备eth0与eth１。
+执行`ifenslave bond0 eth0 eth1 >> /etc/rc.local`，向bonding池中加入实际网络接口设备eth0与eth１。
 
 ### 重启网络
 执行`service network restart`重启网络后，通过`ethtool bond0`可查看bond0的带宽（`Speed`项）。
