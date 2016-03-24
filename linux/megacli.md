@@ -102,6 +102,24 @@ $raid_level_mapping['Primary-1, Secondary-3, RAID Level Qualifier-0'] = '10';
 - 新建Raid：`MegaCli -CfgLdAdd -r(0|1|5) [E:S, E:S, ...] -aN`。如`MegaCli -CfgLdAdd -r0 [10:0] -a0`。
 - 删除Raid：`MegaCli -CfgLdDel -Lx -aN`。
 
+## 实战
 
+系统换过磁盘后，不知道换的是哪块盘，通过`MegaCli -PDList -aALL`可以看到有块盘的状态为foreign:
+```
+# MegaCli -PDList -aALL
+Enclosure Device ID: 22
+Slot Number: 5
+...
+Foreign State: Foreign
+...
+
+```
+
+则该盘为刚更换的盘，接着清除foreign状态：`MegaCli -cfgforeign -clear -a0`。然后做Raid即可：`MegaCli -CfgLdAdd -r0 [22:5] -a0`。若不清foreign就直接做raid，会报如下错误：
+```The specified physical disk does not have the appropriate attributes to complete
+the requested command.
+
+Exit Code: 0x26
+```
 
 
