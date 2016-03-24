@@ -116,7 +116,9 @@ Foreign State: Foreign
 ```
 
 则该盘为刚更换的盘，接着清除foreign状态：`MegaCli -cfgforeign -clear -a0`。然后做Raid即可：`MegaCli -CfgLdAdd -r0 [22:5] -a0`。若不清foreign就直接做raid，会报如下错误：
-```The specified physical disk does not have the appropriate attributes to complete
+
+```
+The specified physical disk does not have the appropriate attributes to complete
 the requested command.
 
 Exit Code: 0x26
