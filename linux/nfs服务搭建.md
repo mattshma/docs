@@ -41,7 +41,7 @@
 
 以上即完成搭建nfs服务。
 
-若在使用nfs的过程，修改了服务端的`/etc/exports`，可通过`exportfs`来重新mount共享的目录。
+若在使用nfs的过程修改了服务端的`/etc/exports`，可在服务端通过`exportfs -r`来重新加载分享的目录。
 
 
 
