@@ -34,6 +34,10 @@
 
 /proc/irq/IRQ#/smp_affinity和/proc/irq/IRQ#/smp_affinity_list指定目标cpu用于处理相应IRQ。保存在/proc/irq/IRQ#/smp_affinity的值是一个十六进制字节掩码，代表系统中所有CPU核。如CPU0，CPU1，CPU2，……分别对应1，2，4，……若指定为0f，则表明CPU0，CPU1，CPU2，CPU3处理该中断，指定为f0，则表示CPU4，CPU5，CPU6，CPU7处理该中断。/proc/irq/IRQ#/smp_affinity_list表示处理中断的相关CPU，为十进制，若相应CPU是范围值，可通过`CPUx-CPUy`来指定，如0到32号CPU都处理该中断：`echo 0-32 > smp_affinity_list`。
 
+当前CPU结构基本都为NUMA，NUMA提供了numad用于管理资源。numad类似于irqbalance，其能通过移动numa节点间的进程来调整资源分配，不过这会造成进程的numa node访问远端node数据。
+
+通过cpu隔离（`isolcpu`）和绑定特定CPU，对于某些CPU压力大的情况确实有用，但这也可能会限制CPU调度器更高效的利用CPU，在numa架构中也会造成读取远端node数据的情况。因此如果不是特别需要，建设通过irqbalance和numad自动平衡cpu资源，若实在需要手动设置，也最好通过affinity_hint来设置，而非强制指定smp_affinity。
+
 ### 软中断
 上述说的都是硬中断，对于CPU执行指令时产生的软中断，可通过`cat /proc/softirqs`查看：
 
@@ -53,6 +57,8 @@ BLOCK_IOPOLL:          0          0
 ```
 
 第一列为各软中断名，如NET_TX和NET_RX高说明和网卡相关。
+
+对于进程绑定cpu，可通过taskset来关联，在NUMA环境中，建议使用numactl代替taskset。
 
 ## Reference
 - [中断和 IRQ 调节](https://access.redhat.com/documentation/zh-CN/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-cpu-irq.html)
