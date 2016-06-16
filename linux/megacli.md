@@ -99,7 +99,8 @@ $raid_level_mapping['Primary-1, Secondary-3, RAID Level Qualifier-0'] = '10';
 
 ## Raid
 
-- 新建Raid：`MegaCli -CfgLdAdd -r(0|1|5) [E:S, E:S, ...] -aN`。如`MegaCli -CfgLdAdd -r0 [10:0] -a0`。
+- 新建Raid：`MegaCli -CfgLdAdd -r(0|1|5) [E:S, E:S, ...] -aN`。如创建RAID0:`MegaCli -CfgLdAdd -r0 [10:0] -a0`和创建Raid10:`MegaCli -CfgSpanAdd -r10 -Array0[E:S,E:S] -Array1[E:S,E:S] -aN`。
+
 - 删除Raid：`MegaCli -CfgLdDel -Lx -aN`。
 
 ## 实战
