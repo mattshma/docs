@@ -105,6 +105,7 @@ $raid_level_mapping['Primary-1, Secondary-3, RAID Level Qualifier-0'] = '10';
 
 ## 实战
 
+### 找到更换的盘
 系统换过磁盘后，不知道换的是哪块盘，通过`MegaCli -PDList -aALL`可以看到有块盘的状态为foreign:
 ```
 # MegaCli -PDList -aALL
@@ -125,4 +126,24 @@ the requested command.
 Exit Code: 0x26
 ```
 
+### 换磁盘
+更换磁盘后，megacli查看状态如下：
+```
+# MegaCli -PDlist -a0 |grep "Firmware state"
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Unconfigured(good), Spun down
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+Firmware state: Online, Spun Up
+```
 
+对于需要备份的raid级别，通过`# MegaCli -PDHSP -Set -PhysDrv [22:6] -a0`将该盘设置为Hotspare状态。若希望该盘直接使用，通过`MegaCli -CfgLdAdd -r0 [22:6] -a0`可将其调整为`Firmware state: Online, Spun Up`。
