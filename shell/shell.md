@@ -1,6 +1,12 @@
 Shell
 ===
 
+## 获取脚本当前目录
+命令为`dirname $0`，在脚本中经常需要先切换到该脚本的所在目录下，如下：
+```
+cd `dirname $0`
+```
+
 Commands that are symbols
 ---
 内建的符号命令
