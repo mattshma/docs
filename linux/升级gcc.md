@@ -1,6 +1,6 @@
 # Linux升级Gcc
 
-在使用mongo时，遇到了`/usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.15' not found`的问题。查找系统所有的libstdc++.so.6，未找到GLIBCXX_3.4.15。网卡搜索rpm包，仍然一堆依赖，无奈安装高版本GCC。过程如下：
+在使用mongo时，遇到了`/usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.15' not found`的问题。通过`strings /usr/lib64/libstdc++.so.6 |grep GLIBC_`查找系统所有的libstdc++.so.6，未找到GLIBCXX_3.4.15。网卡搜索rpm包，仍然一堆依赖，无奈安装高版本GCC。过程如下：
 
 - 下载[GCC4.9.0](http://ftp.gnu.org/gnu/gcc/gcc-4.9.0/gcc-4.9.0.tar.bz2)并解压。
 - 安装依赖，执行命令：`gcc-4.9.0/contrib/download_prerequisites`。

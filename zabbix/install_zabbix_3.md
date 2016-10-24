@@ -5,36 +5,36 @@
 
 ```
 %global debug_package %{nil}
-%global _prefix /opt/zabbix
-%global _exec_prefix /opt/zabbix
-%global _sysconfdir /opt/zabbix/etc
-%global _mandir /opt/zabbix/man
+%global _prefix /opt/zabbix-3.0.5
+%global _exec_prefix %{_prefix}
+%global _sysconfdir %{_prefix}/etc
+%global _mandir %{_prefix}/man
 
-Name:		zabbix-server-ubd
+%global ln_dir /opt/zabbix
+%global log_dir /var/log/zabbix
+%global user zabbix
+
+Name:		zabbix-agent-ubd
 Version:	3.0.5
 Release:	1%{?dist}
-Summary:	youzu bigdata zabbix server
+Summary:	youzu bigdata zabbix agent
 
 Group:		Applications/System
 License:	GPL
 URL:	        http://www.zabbix.com/
-Source0:	zabbix-server-ubd-3.0.5.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
+Source0:	zabbix-agent-ubd-3.0.5.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
-BuildRequires: net-snmp-devel, libxml2-devel, libcurl-devel, mysql-devel
 Requires(pre): /usr/sbin/useradd
-Requires(post): /sbin/chkconfig
+Requires(post): /sbin/chkconfig, /bin/ln
 Requires(preun): /sbin/chkconfig
 Requires(preun): /sbin/service
 
 %description
-youzu bigdata zabbix server.
+youzu bigdata zabbix agent.
 
 %pre
-%define log_dir /var/log/zabbix
-%define user zabbix
-
-grep "^%{user}" /etc/passwd
+grep "^%{user}" /etc/passwd > /dev/null 2>&1
 if [ $? -ne 0 ]; then
   useradd %{user}
 fi
@@ -48,35 +48,30 @@ fi
 %setup -q
 
 %build
-%configure --enable-server --enable-agent --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2
+%configure --enable-agent
 make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
-make install
-install -m 0775 misc/init.d/fedora/core/zabbix_agentd /etc/init.d/zabbix-agent-ubd
-install -m 0775 misc/init.d/fedora/core/zabbix_server /etc/init.d/%{name}
-sed -i "s#BASEDIR=/usr/local#BASEDIR=/opt/zabbix#g" /etc/init.d/zabbix-agent-ubd
+%make_install
+install -m 0775 misc/init.d/fedora/core/zabbix_agentd /etc/init.d/%{name}
 sed -i "s#BASEDIR=/usr/local#BASEDIR=/opt/zabbix#g" /etc/init.d/%{name}
 
 %post
+/bin/ln -s %{_prefix} %{ln_dir}
 /sbin/chkconfig --add %{name}
-/sbin/chkconfig --add zabbix-agent-ubd
 
 %clean
 rm -rf %{buildroot}
 
-%postun
-rm -rf /etc/init.d/zabbix-*-ubd
+%preun
 /sbin/service %{name} stop > /dev/null 2>&1
 /sbin/chkconfig --del %{name}
-/sbin/chkconfig --del zabbix-agent-ubd
 rm -rf /etc/init.d/%{name}
-rm -rf /etc/init.d/zabbix-agent-ubd
 
 %files
-%defattr(-,%{user},%{user},-)
-%doc
+%defattr(-,zabbix,zabbix,-)
+%{_prefix}
 
 %changelog
 ```
@@ -86,15 +81,12 @@ rm -rf /etc/init.d/zabbix-agent-ubd
 ### 升级php
 在升级php前，先安装如下一些依赖，若yum不能安装，则手动编译安装。
 
-- jpeg
-
-下载[jpeg压缩包](http://www.ijg.org/files/)，解决安装，jpeg lib会安装在`/usr/local/lib`。
-
-- PNG
-下载[libpng](http://www.libpng.org/pub/png/libpng.html)安装。
-
-- FreeType
-下载[freetype压缩包](http://download.savannah.gnu.org/releases/freetype/)，解压安装。
+- jpeg   
+下载[jpeg压缩包](http://www.ijg.org/files/)，解决安装，jpeg lib会安装在`/usr/local/lib`。   
+- PNG    
+下载[libpng](http://www.libpng.org/pub/png/libpng.html)安装。    
+- FreeType     
+下载[freetype压缩包](http://download.savannah.gnu.org/releases/freetype/)，解压安装。   
 
 
 编译PHP：
@@ -151,7 +143,8 @@ extension = "gettext.so"
 
 php扩展可通过phpize来安装，在php解压包中执行`phpize`，然后configure和make 安装即可。
 
-在`/usr/local/php/etc`中，修改php-fpm.conf.default为php-fpm.conf，修改php-fpm.d/www.conf.default为php-fpm.d/www.conf，并修改www.conf如下地方
+在`/usr/local/php/etc`中，修改 php-fpm.conf.default 为 php-fpm.conf，修改 php-fpm.d/www.conf.default 为 php-fpm.d/www.conf，并修改www.conf如下地方:
+
 ```
 pm.max_children = 24
 pm.start_servers = 8
@@ -207,4 +200,41 @@ FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected
 
 ### PHP gd JPEG image support missing.
 需要安装JPEG，并重新编译安装PHP，在configure前，先执行`make clean`。
+
+
+### libc.so.6(GLIBC_2.15)(64bit) is needed by zabbix
+打包完成后，yum安装报错如下：
+```
+libc.so.6(GLIBC_2.14)(64bit) is needed by zabbix-agent-ubd-3.0.5-1.el6.x86_64
+libc.so.6(GLIBC_2.15)(64bit) is needed by zabbix-agent-ubd-3.0.5-1.el6.x86_64
+```
+
+查看libc版本：
+```
+# strings /lib64/libc.so.6 |grep GLIBC_
+GLIBC_2.2.5
+GLIBC_2.2.6
+GLIBC_2.3
+GLIBC_2.3.2
+GLIBC_2.3.3
+GLIBC_2.3.4
+GLIBC_2.4
+GLIBC_2.5
+GLIBC_2.6
+GLIBC_2.7
+GLIBC_2.8
+GLIBC_2.9
+GLIBC_2.10
+GLIBC_2.11
+GLIBC_2.12
+GLIBC_PRIVATE
+```
+
+Google了下，发现[Centos 6.8 zabbix 3.0 non support component](https://support.zabbix.com/browse/ZBXNEXT-3378)有如下一段话：
+> Zabbix 3.0 Server is not officially supported for RHEL 6
+> However we have packages http://repo.zabbix.com/zabbix/3.0/rhel/6/x86_64/deprecated/ but without any guarantee that they will work.
+> CentOS 6 does not have official PHP 5.4 version. It is minimal supported version for Zabbix 3.0 web-interface.
+
+但看[zabbix下载页](http://www.zabbix.com/download.php)提供的rpm包，包括centos6，说明应该不会存在问题的，于是下载源码包，在出现问题的机器上直接编译安装，zabbix能正常安装，这说明zabbix对该libc应该不存在要求。想到之前打包的机器升级过GCC，会不会是因为打包机器GCC版本过高导致的呢？于是在出问题的机器上打包，将rpm包放在yum repo中，其他机器重新生成cache，安装成功。
+
 
