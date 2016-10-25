@@ -10,8 +10,10 @@
 %global _sysconfdir %{_prefix}/etc
 %global _mandir %{_prefix}/man
 
+%global init_dir /etc/rc.d/init.d
 %global ln_dir /opt/zabbix
 %global log_dir /var/log/zabbix
+%global pid_dir /var/run/zabbix
 %global user zabbix
 
 Name:		zabbix-agent-ubd
@@ -44,6 +46,10 @@ if [ ! -d %{log_dir} ]; then
   chown -R %{user}:%{user} %{log_dir}
 fi
 
+if [ ! -d %{pid_dir} ]; then
+  mkdir -p %{pid_dir}
+  chown -R %{user}:%{user} %{pid_dir}
+fi
 %prep
 %setup -q
 
@@ -54,8 +60,9 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 %make_install
-install -m 0775 misc/init.d/fedora/core/zabbix_agentd /etc/init.d/%{name}
-sed -i "s#BASEDIR=/usr/local#BASEDIR=/opt/zabbix#g" /etc/init.d/%{name}
+%{__install} -d %{buildroot}%{init_dir}
+%{__install} -m 0775 misc/init.d/fedora/core/zabbix_agentd %{buildroot}%{init_dir}/%{name}
+sed -i "s#BASEDIR=/usr/local#BASEDIR=/opt/zabbix#g" %{buildroot}%{init_dir}/%{name}
 
 %post
 /bin/ln -s %{_prefix} %{ln_dir}
@@ -63,6 +70,7 @@ sed -i "s#BASEDIR=/usr/local#BASEDIR=/opt/zabbix#g" /etc/init.d/%{name}
 
 %clean
 rm -rf %{buildroot}
+rm -rf %{ln_dir}
 
 %preun
 /sbin/service %{name} stop > /dev/null 2>&1
@@ -72,9 +80,12 @@ rm -rf /etc/init.d/%{name}
 %files
 %defattr(-,zabbix,zabbix,-)
 %{_prefix}
+%{init_dir}/%{name}
 
 %changelog
 ```
+
+说明下，此spec文件将zabbix安装路径设为/opt/zabbix-3.0.5，然后做软链/opt/zabbix指向/opt/zabbix-3.0.5这个目录，配置文件位于/opt/zabbix/etc目录中。
 
 打包好后，放入yum源中并安装。
 
