@@ -13,3 +13,11 @@ $ git push
 ```
 可以参考[git rebase](http://blog.csdn.net/mliubing2532/article/details/7577843)
 
+克隆指定分支的仓库
+---
+命令为`git clone -b <branch> <remote_repo>`，如`git clone -b branch-1.0 git@github.com:apache/hbase.git`。
+
+
+参考
+---
+- [git-recipes](https://github.com/geeeeeeeeek/git-recipes)
