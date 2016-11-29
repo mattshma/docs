@@ -1,7 +1,7 @@
 # 安装Zabbix3
 
 ## 打包
-下载Zabbix3后，进行打包，SPEC文件如下：
+下载Zabbix3后，由于agent经常使用，所以这里先对agent打包，SPEC文件如下：
 
 ```
 %global debug_package %{nil}
@@ -33,7 +33,7 @@ Requires(preun): /sbin/chkconfig
 Requires(preun): /sbin/service
 
 %description
-youzu bigdata zabbix agent.
+bigdata zabbix agent.
 
 %pre
 grep "^%{user}" /etc/passwd > /dev/null 2>&1
@@ -88,6 +88,18 @@ rm -rf /etc/init.d/%{name}
 说明下，此spec文件将zabbix安装路径设为/opt/zabbix-3.0.5，然后做软链/opt/zabbix指向/opt/zabbix-3.0.5这个目录，配置文件位于/opt/zabbix/etc目录中。
 
 打包好后，放入yum源中并安装。
+
+### 安装zabbix server
+下载源码，解压安装，在安装前，先看下server安装时的[依赖](https://www.zabbix.com/documentation/3.0/manual/installation/requirements#Server)，这里需要特别说明下，若zabbix使用邮件发送报警，需要注意下server端的curl版本，若低于7.20.0，在发送邮件时，会报错：`Support for SMTP authentication was not compiled in`。因此若curl版本低于7.20.0，需要先将其[升级](https://curl.haxx.se/download/)。
+
+参照[官方install](https://www.zabbix.com/documentation/3.0/manual/installation/install)，编译参数如下：
+```
+# ./configure --prefix=/opt/zabbix-3.0.5 --enable-server --enable-agent --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2
+# make -j24 && make install
+# cp misc/init.d/fedora/core/zabbix_server /etc/init.d/zabbix-server-ubd
+# ln -s /opt/zabbix-3.0.5 /opt/zabbix
+# sed -i "s#BASEDIR=/usr/local#BASEDIR=/opt/zabbix#g" /etc/init.d/zabbix-server-ubd
+```
 
 ### 升级php
 在升级php前，先安装如下一些依赖，若yum不能安装，则手动编译安装。
@@ -154,7 +166,7 @@ extension = "gettext.so"
 
 php扩展可通过phpize来安装，在php解压包中执行`phpize`，然后configure和make 安装即可。
 
-在`/usr/local/php/etc`中，修改 php-fpm.conf.default 为 php-fpm.conf，修改 php-fpm.d/www.conf.default 为 php-fpm.d/www.conf，并修改www.conf如下地方:
+在`/usr/local/php/etc`中，修改 php-fpm.conf.default 为 php-fpm.conf，修改 php-fpm.d/www.conf.default 为 php-fpm.d/www.conf ，并修改www.conf如下地方:
 
 ```
 pm.max_children = 24
