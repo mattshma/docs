@@ -31,6 +31,10 @@
 
 ```
 
+## umask
+umask用于控制默认权限，默认为022，新建文件时请求权限为666，内核将该权限与umask做计算，得出最终文件权限为644（666-0222），类似，创建目录时，新建目录权限为777，与umask计算后，最终目录权限为755（777-022），通过`umask <MASK_NUM>`可设置umask值。
+
+
 ## Setuid bit
 当文件设置SUID后，执行该文件的用户以该命令拥有者的权限去执行。即无论谁来执行这个文件，都会以该文件所有者的身份执行。suid只对文件有效，设置suid的命令为`chmod u+s filename`。
 
@@ -63,8 +67,27 @@
 ## acl
 有时候文件显示为`-rw-r--r--+`，后面的`+`符号代表该文件或目录设置了acl。通过`getfacl filename`可查看。
 
+acl由一系列的Access Entry组成，每条Access Entry定义了特定类别对文件拥有的操作权限，如下是各种[ACL Entries](http://www.vanemery.com/Linux/ACL/POSIX_ACL_on_Linux.html)，每一条entry由：type（user/group/other/mask），qualifier（指定某user/group），permissions(rwx)三部分组成，如下 :
+
+ Entry Type | Text Form Example
+------------|----------------
+ ACL_USER_OBJ | user::rwx
+ ACL_USER | user:name:rwx
+ ACL_GROUP_OBJ | group::rwx
+ ACL_GROUP| group:name:rwx
+ ACL_MASK | mask::rwx
+ ACL_OTHER | other::rwx
+
+ACL_MASK只作用于ACL_USER, ACL_GROUP_OBJ, 和ACL_GROUP，其限制了这三种Access Entry的最大权限，如对于ACL_GROUP而言，若ACL_MASK未设置，则使用ACL_GROUP设置的权限，若设置了ACL_MASK，最大能拥有的权限是ACL_MASK。
+
+以上均为Access ACL，还可以对目录设置default acl，这样该目录下的文件默认会继承该目录的ACL。
+
 ## selinux acl
 若文件显示为`-rw-r--r--.`，说明开启了SELinux ACL。
 
 
-
+## 参考
+- [UMASK(2)](http://man7.org/linux/man-pages/man2/umask.2.html)
+- [How ACL & MASK work in linux?](http://kmaiti.blogspot.jp/2011/09/acl-and-mask-in-linux.html)
+- [ACL(5)](http://man7.org/linux/man-pages/man5/acl.5.html)
+- [POSIX Access Control Lists on Linux](http://www.vanemery.com/Linux/ACL/POSIX_ACL_on_Linux.html)
