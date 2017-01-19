@@ -21,3 +21,6 @@ Zabbix
  只追加权限。设置该位后，文件只能追加，不能删除，而且不能使用编辑器追加。通过 `chattr +a filename` 来设置该位。
   
 这里有两种方法来解决这个问题，第一种是让 zabbix 用户可以执行 netstat （在 `/etc/sudoers` 中设置），另外一种是给 netstat 设置 s 位。
+
+## zabbix 自动发现时显示hostname
+若希望zabbix自动发现时显示hostname，则discovery rules的check条件和Device uniqueness criteria均需为`Zabbix agent "system.uname"`，另外zabbix server的/etc/hosts文件需有各agent的信息，或使用dns服务器能反解各agent信息。
