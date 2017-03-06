@@ -1,4 +1,4 @@
-edis Persistance
+redis Persistance
 ---
 
 当仅要求高可用时，可以考虑 Redis Persistence 的 `AOF` 方案（当日志文件越来越大时，使用 `bgrewriteaof` 重写）。 注意数据较大时，在 AOF rewrite 的过程中可能会出现服务暂停（因为此时机器的I/O和load很高）的情况，此时可以考虑使用 `no-appendfsync-on-rewrite yes` 来关掉 rewrite 时 fsync 操作，直到 rewrite 完成，才将保存在内存中的数据写到磁盘中去。
