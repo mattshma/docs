@@ -8,7 +8,7 @@
 
 ```
 # git config --global http.proxy sock5://127.0.0.1:1080
-# git config --global http.proxy sock5://127.0.0.1:1080
+# git config --global https.proxy sock5://127.0.0.1:1080
 ```
 
 
@@ -17,7 +17,7 @@
 
 ```
 # git config --global http.http://github.com.proxy sock5://127.0.0.1:1080
-# git config --global http.https://github.com.proxy sock5://127.0.0.1:1080
+# git config --global https.https://github.com.proxy sock5://127.0.0.1:1080
 ```
 
 
