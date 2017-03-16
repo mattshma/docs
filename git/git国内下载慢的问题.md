@@ -17,12 +17,16 @@
 
 ```
 # git config --global http.http://github.com.proxy sock5://127.0.0.1:1080
-# git config --global https.https://github.com.proxy sock5://127.0.0.1:1080
+# git config --global http.https://github.com.proxy sock5://127.0.0.1:1080
 ```
 
 
 
-由于代理针对 http 协议，所以拉取 Repo 时，需要使用仓库的 http 地址，如 `git clone https://github.com/apache/hadoop.git ` 。
+注意：针对 https 协议设置的是 `http.https://github.com.proxy` 。
+
+
+
+由于代理针对 http 协议，所以拉取 Repo 时，需要使用仓库的 http/s 地址，如 `git clone https://github.com/apache/hadoop.git ` ，而非 ssh 地址。
 
 
 
