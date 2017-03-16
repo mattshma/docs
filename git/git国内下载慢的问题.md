@@ -26,7 +26,10 @@
 
 
 
+若需要取消代理的话，可通过 `git config --global --unset http.proxy` 的方式 取消对应的设置。
+
+
+
 ## 参考
 
 - [git-config(1) Manual Page](https://www.kernel.org/pub/software/scm/git/docs/git-config.html#_example)
-- ​
