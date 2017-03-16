@@ -22,7 +22,7 @@
 
 
 
-由于代理针对 http 协议，所以拉取 Repo 时，需要使用仓库的 http 地址，如 `git clonehttps://github.com/apache/hadoop.git ` 。
+由于代理针对 http 协议，所以拉取 Repo 时，需要使用仓库的 http 地址，如 `git clone https://github.com/apache/hadoop.git ` 。
 
 
 
