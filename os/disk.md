@@ -35,7 +35,7 @@
 可以看到，当数据较随机时，磁头需要来回不断的移动。FCFS 的优点是公平简单，不会有饥饿的情况，缺点是效率不高。
 
 #### Shortest Seek Time First 
-简称 SSTF，即最短寻找时间优先算法，其每次磁头每次处理的都是离当前磁道最近的磁道。如读取 50 号磁道的数据后，由于 62 离其最近，因此接下来处理 62 号磁道数据，而非95，接下来的请求依此类推。如下图：
+简称 SSTF，即最短寻找时间优先算法，其每次磁头每次处理的都是离当前磁道最近的磁道。如读取 50 号磁道的数据后，由于 62 离其最近，因此接下来处理 62 号磁道数据，而非 95，接下来的请求依此类推。如下图：
 
 ![sstf](http://www.cs.iit.edu/~cs561/cs450/disksched/sstf.bmp)
 
@@ -62,7 +62,13 @@
 ![c-look](http://www.cs.iit.edu/~cs561/cs450/disksched/c-look.bmp)
 
 ### 检测坏磁盘
+磁盘检测可以通过 Megacli 或定期查看 dmesg 等来做，对于检查只读情况，也可以查看 `/proc/mount` 状态。以下是检查 dmesg 时发现的部分常见问题。
 
-## 参考
+- EXT4-fs error      
+这类问题是文件系统故障，修复或重新格式化文件系统即可。
+
+__TODO__
+
+### 参考
 - [Disk structure](http://dysphoria.net/OperatingSystems1/6_physical_disk.html)
 - [Disk Scheduling Algorithms](http://www.cs.iit.edu/~cs561/cs450/disksched/disksched.html)
